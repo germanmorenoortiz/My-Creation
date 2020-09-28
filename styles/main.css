@@ -42,3 +42,10 @@ body {
   background-size: contain;
   cursor: pointer;
 }
+
+.cocos {
+  background-color: orange;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}

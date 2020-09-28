@@ -15,13 +15,49 @@ for (let index = 0; index < cellCount; index = index + 1) {
 }
 
 // Impresion de pared por posiciones
-const pared = [0, 1, 3, 4, 5, 6, 8, 9, 55, 56];
+const pared = [
+  2,
+  8,
+  9,
+  12,
+  14,
+  15,
+  16,
+  28,
+  29,
+  31,
+  32,
+  34,
+  35,
+  36,
+  41,
+  42,
+  44,
+  45,
+  46,
+  48,
+  58,
+  61,
+  62,
+  64,
+  65,
+  66,
+  68,
+  71,
+  72,
+  84,
+  85,
+  87,
+  89,
+  92,
+  99,
+];
 pared.forEach((element) => {
   cells[element].classList.add('laberinto');
 });
 
 // Posicion inicial de pacman
-let pacmanPosition = 89;
+let pacmanPosition = 55;
 
 const canImove = (position) => {
   if (pared.includes(position)) {
@@ -107,6 +143,12 @@ window.addEventListener('keyup', handleKeyPress);
 
 // TODO:
 // 1 Imprimir comida en los elementos que no son pared
+
+const comida = [0, 1, 3, 4, 5, 6, 7, 10, 11];
+
+comida.forEach((element) => {
+  cells[element].classList.add('cocos');
+});
 // 2 Añadir logica de comer comida (remover la comida una vez que pacman ocupe ese posicion)
 // 3 Añadir logica de cuando como comida añade puntos al score.
 // 3.1 Constreñir logica de cuando me muevo a una posicion que tuvo comida, no coma o agregue puntos
