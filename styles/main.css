@@ -44,8 +44,5 @@ body {
 }
 
 .cocos {
-  background-color: orange;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
+  background-image: radial-gradient(circle, yellow 0%, yellow 50%, white 50%);
 }
