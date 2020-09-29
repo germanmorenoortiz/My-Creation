@@ -42,3 +42,12 @@ body {
   background-size: contain;
   cursor: pointer;
 }
+.grid div.ghost {
+  background-image: url('../assets/ghost.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+.cocos {
+  background-image: radial-gradient(circle, yellow 0%, yellow 15%, white 15%);
+}
