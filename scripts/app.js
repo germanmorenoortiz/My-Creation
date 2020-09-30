@@ -77,6 +77,9 @@ const removePacman = (index) => cells[index].classList.remove('pacman');
 const addGhost = (index) => cells[index].classList.add('ghost');
 const removeGhost = (index) => cells[index].classList.remove('ghost');
 
+const x = ghostPosicion % 10;
+const y = Math.floor(ghostPosicion / 10);
+
 const handleKeyPress = (event) => {
   // Letra que estoy oprimiendo
   const { key } = event;
@@ -150,6 +153,7 @@ const handleKeyPress = (event) => {
 };
 
 addPacman(pacmanPosition);
+addGhost(ghostPosicion);
 
 window.addEventListener('keyup', handleKeyPress);
 
@@ -256,5 +260,3 @@ function showScore() {
   resultado.innerHTML = score;
 }
 // 5 girar pacman en la direccion en que se mueve
-
-//object.style.transform = 'rotate(Xdeg)';
