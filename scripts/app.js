@@ -57,7 +57,6 @@ pared.forEach((element) => {
 
 // Posicion inicial de pacman y ghost
 let pacmanPosition = 55;
-let ghostPosicion = 35;
 
 const canImove = (position) => {
   if (pared.includes(position)) {
@@ -72,13 +71,6 @@ const canImove = (position) => {
 
 const addPacman = (index) => cells[index].classList.add('pacman');
 const removePacman = (index) => cells[index].classList.remove('pacman');
-
-// añadir ghost
-const addGhost = (index) => cells[index].classList.add('ghost');
-const removeGhost = (index) => cells[index].classList.remove('ghost');
-
-const x = ghostPosicion % 10;
-const y = Math.floor(ghostPosicion / 10);
 
 const handleKeyPress = (event) => {
   // Letra que estoy oprimiendo
@@ -153,7 +145,6 @@ const handleKeyPress = (event) => {
 };
 
 addPacman(pacmanPosition);
-addGhost(ghostPosicion);
 
 window.addEventListener('keyup', handleKeyPress);
 
@@ -260,3 +251,82 @@ function showScore() {
   resultado.innerHTML = score;
 }
 // 5 girar pacman en la direccion en que se mueve
+
+/************************ */
+// Ghost
+/************************ */
+
+// añadir ghost
+
+class Ghost {
+  constructor(position) {
+    this.position = position;
+    this.x = this.position % 10;
+    this.y = Math.floor(position / 10);
+  }
+
+  render(position) {
+    cells[position].classList.add('ghost');
+  }
+
+  remove(position) {
+    cells[position].classList.remove('ghost');
+  }
+
+  refreshCoordinates() {
+    this.x = this.position % 10;
+    this.y = Math.floor(this.position / 10);
+  }
+
+  moveToRight() {
+    if (this.x < width - 1) {
+      // calculo nueva posicion
+      const newPosition = this.position + 1;
+      // evaluo si me puedo mover a esa posicion
+      if (canImove(newPosition)) {
+        // si me puedo mover a esa posicion me muevo
+        this.remove(this.position);
+        this.position = newPosition;
+        this.refreshCoordinates();
+        this.render(this.position);
+      }
+    }
+  }
+
+  moveToleft() {
+    if (this.x > 0) {
+      // calculo nueva posicion
+      const newPosition = this.position - 1;
+      // evaluo si me puedo mover a esa posicion
+      if (canImove(newPosition)) {
+        this.remove(this.position);
+        this.position = newPosition;
+        this.refreshCoordinates();
+        this.render(this.position);
+      }
+    }
+  }
+}
+
+let ghostPositions = [7, 35, 95];
+let ghosts = [];
+
+const renderGhost = (position) => {
+  const ghost = new Ghost(position);
+  ghost.render(ghost.position);
+  ghosts.push(ghost);
+};
+
+ghostPositions.forEach(renderGhost);
+
+const fantasma = new Ghost(80);
+
+fantasma.render(fantasma.position);
+
+// const addGhost = (index) => cells[index].classList.add('ghost');
+// const removeGhost = (index) => cells[index].classList.remove('ghost');
+
+// addGhost(ghostPosicion);
+
+// const x = ghostPosicion % 10;
+// const y = Math.floor(ghostPosicion / 10);
