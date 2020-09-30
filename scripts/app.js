@@ -344,7 +344,10 @@ class Ghost {
   }
 
   moveRandomlyInterval() {
-    this.moveRandomlyIntervalId = setInterval(this.moveRandomly, 700);
+    this.moveRandomlyIntervalId = setInterval(
+      this.moveRandomly.bind(this),
+      700,
+    );
   }
 }
 
@@ -355,18 +358,7 @@ const renderGhost = (position) => {
   const ghost = new Ghost(position);
   ghost.render(ghost.position);
   ghosts.push(ghost);
+  ghost.moveRandomlyInterval();
 };
 
 ghostPositions.forEach(renderGhost);
-
-const fantasma = new Ghost(80);
-
-fantasma.render(fantasma.position);
-
-// const addGhost = (index) => cells[index].classList.add('ghost');
-// const removeGhost = (index) => cells[index].classList.remove('ghost');
-
-// addGhost(ghostPosicion);
-
-// const x = ghostPosicion % 10;
-// const y = Math.floor(ghostPosicion / 10);
