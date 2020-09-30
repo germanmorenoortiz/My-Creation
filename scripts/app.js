@@ -258,11 +258,15 @@ function showScore() {
 
 // añadir ghost
 
+// Crea un numero aleatorio entre 1 y 10
+const getRandomNumber = () => Math.floor(Math.random() * (4 - 1 + 1) + 1);
+
 class Ghost {
   constructor(position) {
     this.position = position;
     this.x = this.position % 10;
     this.y = Math.floor(position / 10);
+    this.moveRandomlyIntervalId = null;
   }
 
   render(position) {
@@ -278,33 +282,69 @@ class Ghost {
     this.y = Math.floor(this.position / 10);
   }
 
+  moveToPosition(newPosition) {
+    this.remove(this.position);
+    this.position = newPosition;
+    this.refreshCoordinates();
+    this.render(this.position);
+  }
+
   moveToRight() {
     if (this.x < width - 1) {
-      // calculo nueva posicion
       const newPosition = this.position + 1;
-      // evaluo si me puedo mover a esa posicion
       if (canImove(newPosition)) {
-        // si me puedo mover a esa posicion me muevo
-        this.remove(this.position);
-        this.position = newPosition;
-        this.refreshCoordinates();
-        this.render(this.position);
+        this.moveToPosition(newPosition);
       }
     }
   }
 
   moveToleft() {
     if (this.x > 0) {
-      // calculo nueva posicion
       const newPosition = this.position - 1;
-      // evaluo si me puedo mover a esa posicion
       if (canImove(newPosition)) {
-        this.remove(this.position);
-        this.position = newPosition;
-        this.refreshCoordinates();
-        this.render(this.position);
+        this.moveToPosition(newPosition);
       }
     }
+  }
+
+  moveToUp() {
+    if (this.y > 0) {
+      const newPosition = this.position - width;
+      if (canImove(newPosition)) {
+        this.moveToPosition(newPosition);
+      }
+    }
+  }
+
+  moveToDown() {
+    if (this.y < width - 1) {
+      const newPosition = this.position + width;
+      if (canImove(newPosition)) {
+        this.moveToPosition(newPosition);
+      }
+    }
+  }
+
+  moveRandomly() {
+    const randomNumber = getRandomNumber();
+    switch (randomNumber) {
+      case 1:
+        this.moveToUp();
+        break;
+      case 2:
+        this.moveToRight();
+        break;
+      case 3:
+        this.moveToDown();
+        break;
+      case 4:
+        this.moveToleft();
+        break;
+    }
+  }
+
+  moveRandomlyInterval() {
+    this.moveRandomlyIntervalId = setInterval(this.moveRandomly, 700);
   }
 }
 
