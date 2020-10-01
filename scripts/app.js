@@ -331,15 +331,19 @@ class Ghost {
     switch (randomNumber) {
       case 1:
         this.moveToUp();
+        muertePacman();
         break;
       case 2:
         this.moveToRight();
+        muertePacman();
         break;
       case 3:
         this.moveToDown();
+        muertePacman();
         break;
       case 4:
         this.moveToleft();
+        muertePacman();
         break;
     }
   }
@@ -347,7 +351,7 @@ class Ghost {
   moveRandomlyInterval() {
     this.moveRandomlyIntervalId = setInterval(
       this.moveRandomly.bind(this),
-      700,
+      500,
     );
   }
 }
@@ -366,6 +370,6 @@ ghostPositions.forEach(renderGhost);
 
 function muertePacman() {
   if (cells[pacmanPosition].classList.contains('ghost')) {
-    console.log('muerte A PACAMAN');
+    console.log('muerte A PACMAN');
   }
 }

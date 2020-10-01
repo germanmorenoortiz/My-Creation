@@ -5,16 +5,19 @@
 body {
   height: 100vh;
   margin: 0;
+  background-color: black;
 }
 
 h1 {
   display: flex;
   justify-content: center;
+  color: yellow;
 }
 
 h2 {
   display: flex;
   justify-content: center;
+  color: yellow;
 }
 
 .grid-wrapper {
@@ -33,17 +36,23 @@ h2 {
   justify-content: center;
   height: 600px;
   width: 600px;
+  background-color: black;
+  border: 2px solid darkblue;
+  border-radius: 10px;
 }
 
 .grid div {
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   flex-grow: 1;
   height: 10%;
   width: 10%;
+  color: rgba(255, 255, 255, 0);
 }
 
 .laberinto {
-  background-color: aqua;
+  background-color: darkblue;
+  border: 4px solid darkblue;
+  border-radius: 5px;
 }
 
 .grid div.pacman {
@@ -59,5 +68,5 @@ h2 {
   cursor: pointer;
 }
 .cocos {
-  background-image: radial-gradient(circle, yellow 0%, yellow 15%, white 15%);
+  background-image: radial-gradient(circle, yellow 0%, yellow 15%, black 15%);
 }
