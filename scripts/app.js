@@ -57,7 +57,6 @@ pared.forEach((element) => {
 
 // Posicion inicial de pacman y ghost
 let pacmanPosition = 55;
-let ghostPosicion = 35;
 
 const canImove = (position) => {
   if (pared.includes(position)) {
@@ -72,10 +71,6 @@ const canImove = (position) => {
 
 const addPacman = (index) => cells[index].classList.add('pacman');
 const removePacman = (index) => cells[index].classList.remove('pacman');
-
-// añadir ghost
-const addGhost = (index) => cells[index].classList.add('ghost');
-const removeGhost = (index) => cells[index].classList.remove('ghost');
 
 const handleKeyPress = (event) => {
   // Letra que estoy oprimiendo
@@ -147,6 +142,7 @@ const handleKeyPress = (event) => {
 
   addPacman(pacmanPosition);
   comerCoco();
+  muertePacman();
 };
 
 addPacman(pacmanPosition);
@@ -257,4 +253,119 @@ function showScore() {
 }
 // 5 girar pacman en la direccion en que se mueve
 
-//object.style.transform = 'rotate(Xdeg)';
+/************************ */
+// Ghost
+/************************ */
+
+// añadir ghost
+
+// Crea un numero aleatorio entre 1 y 10
+const getRandomNumber = () => Math.floor(Math.random() * (4 - 1 + 1) + 1);
+
+class Ghost {
+  constructor(position) {
+    this.position = position;
+    this.x = this.position % 10;
+    this.y = Math.floor(position / 10);
+    this.moveRandomlyIntervalId = null;
+  }
+
+  render(position) {
+    cells[position].classList.add('ghost');
+  }
+
+  remove(position) {
+    cells[position].classList.remove('ghost');
+  }
+
+  refreshCoordinates() {
+    this.x = this.position % 10;
+    this.y = Math.floor(this.position / 10);
+  }
+
+  moveToPosition(newPosition) {
+    this.remove(this.position);
+    this.position = newPosition;
+    this.refreshCoordinates();
+    this.render(this.position);
+  }
+
+  moveToRight() {
+    if (this.x < width - 1) {
+      const newPosition = this.position + 1;
+      if (canImove(newPosition)) {
+        this.moveToPosition(newPosition);
+      }
+    }
+  }
+
+  moveToleft() {
+    if (this.x > 0) {
+      const newPosition = this.position - 1;
+      if (canImove(newPosition)) {
+        this.moveToPosition(newPosition);
+      }
+    }
+  }
+
+  moveToUp() {
+    if (this.y > 0) {
+      const newPosition = this.position - width;
+      if (canImove(newPosition)) {
+        this.moveToPosition(newPosition);
+      }
+    }
+  }
+
+  moveToDown() {
+    if (this.y < width - 1) {
+      const newPosition = this.position + width;
+      if (canImove(newPosition)) {
+        this.moveToPosition(newPosition);
+      }
+    }
+  }
+
+  moveRandomly() {
+    const randomNumber = getRandomNumber();
+    switch (randomNumber) {
+      case 1:
+        this.moveToUp();
+        break;
+      case 2:
+        this.moveToRight();
+        break;
+      case 3:
+        this.moveToDown();
+        break;
+      case 4:
+        this.moveToleft();
+        break;
+    }
+  }
+
+  moveRandomlyInterval() {
+    this.moveRandomlyIntervalId = setInterval(
+      this.moveRandomly.bind(this),
+      700,
+    );
+  }
+}
+
+let ghostPositions = [7, 35, 95];
+let ghosts = [];
+
+const renderGhost = (position) => {
+  const ghost = new Ghost(position);
+  ghost.render(ghost.position);
+  ghosts.push(ghost);
+  ghost.moveRandomlyInterval();
+};
+
+ghostPositions.forEach(renderGhost);
+
+function muertePacman() {
+  if (cells[pacmanPosition].classList.contains('ghost')) {
+    console.log('muerte A PACAMAN');
+  }
+}
