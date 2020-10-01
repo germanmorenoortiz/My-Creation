@@ -142,6 +142,7 @@ const handleKeyPress = (event) => {
 
   addPacman(pacmanPosition);
   comerCoco();
+  muertePacman();
 };
 
 addPacman(pacmanPosition);
@@ -362,3 +363,9 @@ const renderGhost = (position) => {
 };
 
 ghostPositions.forEach(renderGhost);
+
+function muertePacman() {
+  if (cells[pacmanPosition].classList.contains('ghost')) {
+    console.log('muerte A PACAMAN');
+  }
+}

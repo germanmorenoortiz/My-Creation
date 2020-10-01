@@ -7,6 +7,16 @@ body {
   margin: 0;
 }
 
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
 .grid-wrapper {
   height: 100vh;
   display: flex;
