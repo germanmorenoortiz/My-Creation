@@ -70,3 +70,49 @@ h2 {
 .cocos {
   background-image: radial-gradient(circle, yellow 0%, yellow 15%, black 15%);
 }
+
+.gameOverPanel {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: gm 3s;
+  order: 10;
+  background-color: yellow;
+  color: red;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 5rem;
+}
+
+@keyframes gm {
+  100% {
+    transform: scale(0);
+  }
+}
+
+.winnerPanel {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: gm 3s;
+  order: 10;
+  background-color: darkblue;
+  color: darkcyan;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 10rem;
+}
+
+@keyframes gm {
+  100% {
+    transform: scale(0);
+  }
+}
