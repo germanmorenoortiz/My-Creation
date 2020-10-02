@@ -20,6 +20,11 @@ h2 {
   color: yellow;
 }
 
+h3 {
+  display: flex;
+  justify-content: center;
+  color: yellow;
+}
 .grid-wrapper {
   height: 100vh;
   display: flex;
