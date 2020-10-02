@@ -233,6 +233,17 @@ function comerCoco() {
     cells[pacmanPosition].classList.remove('cocos');
     score = 100 + score;
     console.log(score);
+    if (score === 6400) {
+      console.log('winner!');
+      window.removeEventListener('keydown', handleKeyPress);
+      const panel = document.createElement('div');
+      panel.innerHTML = 'WINNER!';
+      document.querySelector('body').appendChild(panel);
+      panel.classList.add('winnerPanel');
+      setTimeout(() => {
+        window.location.href = './index.html';
+      }, 10000);
+    }
     showScore();
   }
 }
@@ -351,7 +362,7 @@ class Ghost {
   moveRandomlyInterval() {
     this.moveRandomlyIntervalId = setInterval(
       this.moveRandomly.bind(this),
-      500,
+      300,
     );
   }
 }
@@ -370,6 +381,15 @@ ghostPositions.forEach(renderGhost);
 
 function muertePacman() {
   if (cells[pacmanPosition].classList.contains('ghost')) {
-    console.log('muerte A PACMAN');
+    console.log('Game Over');
+    window.removeEventListener('keydown', handleKeyPress);
+    const panel = document.createElement('div');
+    panel.innerHTML = 'Game Over';
+    document.querySelector('body').appendChild(panel);
+    panel.classList.add('gameOverPanel');
+    setTimeout(() => {
+      window.location.href = './index.html';
+    }, 8000);
+    // return playing;
   }
 }
